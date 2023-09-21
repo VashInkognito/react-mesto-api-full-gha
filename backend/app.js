@@ -12,7 +12,7 @@ const { validateLogin, validateCreateUser } = require('./middlewares/validation'
 const errorHandler = require('./middlewares/error-handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT, DB_ADDRESS } = process.env;
+const { PORT } = process.env;
 
 // подключаемся к серверу mongo
 const options = {
@@ -20,7 +20,7 @@ const options = {
   useNewUrlParser: true,
   autoIndex: true,
 };
-mongoose.connect(DB_ADDRESS, options);
+mongoose.connect('mongodb://127.0.0.1:27017/mestodb', options);
 
 const app = express();
 

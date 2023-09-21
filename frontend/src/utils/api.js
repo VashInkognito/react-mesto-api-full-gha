@@ -78,7 +78,7 @@ class Api {
 
 // Создание экземпляра класса Api
 const api = new Api({
-  baseUrl: 'http://localhost:4000/',
+  baseUrl: 'http://localhost:3000/',
   headers: {
     'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json',
