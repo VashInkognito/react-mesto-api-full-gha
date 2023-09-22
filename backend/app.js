@@ -24,7 +24,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', options);
 
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:3001' }));
+app.use(cors({ origin: ['http://localhost:3001', 'https://localhost:3001', 'https://vashinkognito.nomoredomainsrocks.ru', 'http://vashinkognito.nomoredomainsrocks.ru'] }));
 
 // для сборки JSON-файла
 app.use(bodyParser.json());

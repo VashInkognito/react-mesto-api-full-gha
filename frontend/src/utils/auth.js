@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'http://api.vashinkognito.nomoredomainsrocks.ru';
 
 function getResponseData(res) {
   if (res.ok) {
