@@ -8,8 +8,6 @@
 
 ## Ссылки на проект
 
-IP-адрес 130.193.41.151
-
+IP 130.193.41.151
 Frontend https://vashinkognito.nomoredomainsrocks.ru
-
 Backend https://api.vashinkognito.nomoredomainsrocks.ru

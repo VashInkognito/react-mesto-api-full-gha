@@ -78,7 +78,7 @@ class Api {
 
 // Создание экземпляра класса Api
 const api = new Api({
-  baseUrl: 'http://api.vashinkognito.nomoredomainsrocks.ru/',
+  baseUrl: 'https://api.vashinkognito.nomoredomainsrocks.ru/',
   headers: {
     'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json',

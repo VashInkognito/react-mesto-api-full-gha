@@ -1,4 +1,4 @@
-const BASE_URL = 'http://api.vashinkognito.nomoredomainsrocks.ru';
+const BASE_URL = 'https://api.vashinkognito.nomoredomainsrocks.ru';
 
 function getResponseData(res) {
   if (res.ok) {
