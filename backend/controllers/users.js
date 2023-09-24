@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 const BadRequestError = require('../errors/bad-request-err'); // 400
-const UnauthorizedError = require('../errors/unauthorized-err'); // 401
 const NotFoundError = require('../errors/not-found-err'); // 404
 const ConflictError = require('../errors/conflict-err'); // 409
 
@@ -41,19 +40,12 @@ module.exports.login = (req, res, next) => {
       // вернём токен
       res.status(200).send({ token });
     })
-    .catch(() => {
-      // ошибка аутентификации
-      next(new UnauthorizedError('Неправильная почта или пароль'));
-    });
+    .catch(next);
 };
 
 module.exports.getUsersInfo = (req, res, next) => {
   User.find({})
-    .then((users) => {
-      if (!users) {
-        return next(new NotFoundError('Пользователи не найдены'));
-      } return res.status(200).send({ users });
-    })
+    .then((users) => res.status(200).send({ users }))
     .catch(next);
 };
 
@@ -77,7 +69,12 @@ module.exports.getCurrentUserInfo = (req, res, next) => {
 module.exports.editUserInfo = (req, res, next) => {
   const { name, about } = req.body;
   User.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
-    .then((user) => res.status(200).send(user))
+    .then((user) => {
+      if (!user) {
+        return next(new NotFoundError('Пользователь не найден'));
+      }
+      return res.status(200).send(user);
+    })
     .catch((err) => {
       if (err.name === 'ValidationError') {
         return next(new BadRequestError('Переданы некорректные данные при обновлении пользователя'));

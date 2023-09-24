@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const { errors } = require('celebrate');
 
@@ -27,9 +26,7 @@ const app = express();
 app.use(cors({ origin: ['http://localhost:3001', 'https://localhost:3001', 'https://vashinkognito.nomoredomainsrocks.ru', 'http://vashinkognito.nomoredomainsrocks.ru'] }));
 
 // для сборки JSON-файла
-app.use(bodyParser.json());
-// для приёма веб-страниц внутри POST-запроса
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
 // краш-тест сервера
 app.get('/crash-test', () => {
@@ -50,14 +47,14 @@ app.use(auth);
 app.use('/users', require('./routes/users'));
 app.use('/cards', require('./routes/cards'));
 
+app.use('*', (req, res, next) => {
+  next(new NotFoundError('Страница не найдена'));
+});
+
 // подключаем логгер ошибок
 app.use(errorLogger);
 
 app.use(errors());
-
-app.use('*', (req, res, next) => {
-  next(new NotFoundError('Страница не найдена'));
-});
 
 app.use(errorHandler);
 
