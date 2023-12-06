@@ -85,4 +85,4 @@ DELETE, `/cards/:cardId/likes`;
 
 ## ✎ Адрес репозитория
 
-https://github.com/VashInkognito/movies-explorer-api
+https://github.com/VashInkognito/react-mesto-api-full-gha
